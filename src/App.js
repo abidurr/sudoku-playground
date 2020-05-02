@@ -5,10 +5,13 @@ import { makePuzzle, pluck } from "./sudoku";
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+    const answer = makePuzzle()
+    const initial = pluck(answer, 25)
+    const sudoku = { initial, answer }
     this.state = {
       isToggleOn: true,
-      sudoku: {}
+      sudoku: sudoku,
     }
     this.handleClick = this.handleClick.bind(this)
     this.makeSudoku = this.makeSudoku.bind(this)
@@ -21,12 +24,18 @@ class App extends React.Component {
   }
 
   makeSudoku() {
-    const answer = makePuzzle()
-    const initial = pluck(answer, 25)
-    const sudoku = { initial, answer }
-    console.log(sudoku)
 
-    return (JSON.stringify(sudoku))
+    return (JSON.stringify(this.state.sudoku))
+  }
+
+  makeTable(values) {
+    let str = ""
+    for (var i = 0; i < values.length; i++) {
+      str = str + "<td>" + values[i] + "</td>"
+    }
+    console.log(str)
+    return str
+
   }
 
   render() {
@@ -45,9 +54,8 @@ class App extends React.Component {
             <thead>
               <tr>
                 <th>#</th>
-                <th>A</th>
-                <th>B</th>
-                <th>C</th>
+                < this.makeTable props={this.state.sudoku.answer[1]} />
+
               </tr>
             </thead>
             <tbody>
