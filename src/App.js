@@ -2,19 +2,18 @@ import React from "react";
 import "./App.css";
 import { makePuzzle, pluck } from "./sudoku";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const answer = makePuzzle()
-    const initial = pluck(answer, 25)
-    const sudoku = { initial, answer }
+    const answer = makePuzzle();
+    const initial = pluck(answer, 25);
+    const sudoku = { initial, answer };
     this.state = {
       isToggleOn: true,
       sudoku: sudoku,
-    }
-    this.handleClick = this.handleClick.bind(this)
-    this.makeSudoku = this.makeSudoku.bind(this)
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.makeSudoku = this.makeSudoku.bind(this);
   }
 
   handleClick() {
@@ -24,38 +23,37 @@ class App extends React.Component {
   }
 
   makeSudoku() {
-
-    return (JSON.stringify(this.state.sudoku))
+    return JSON.stringify(this.state.sudoku);
   }
 
   makeTable(values) {
-    let str = ""
+    let str = "";
     for (var i = 0; i < values.length; i++) {
-      str = str + "<td>" + values[i] + "</td>"
+      str = str + "<td>" + values[i] + "</td>";
     }
-    console.log(str)
-    return str
-
+    console.log(str);
+    return str;
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <div style={{
-            color: this.state.isToggleOn ? "black" : "white"
-          }}><h1>HELLO</h1></div>
+          <div
+            style={{
+              color: this.state.isToggleOn ? "black" : "white",
+            }}
+          >
+            <h1>HELLO</h1>
+          </div>
           {}
-          <button onClick={this.handleClick}>
-            CHANGE
-          </button>
+          <button onClick={this.handleClick}>CHANGE</button>
           <this.makeSudoku />
           <table className="sudoku-table">
             <thead>
               <tr>
                 <th>#</th>
-                < this.makeTable props={this.state.sudoku.answer[1]} />
-
+                <this.makeTable props={this.state.sudoku.answer[1]} />
               </tr>
             </thead>
             <tbody>
@@ -81,7 +79,7 @@ class App extends React.Component {
           </table>
         </header>
       </div>
-    )
+    );
   }
 }
 export default App;
